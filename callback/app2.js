@@ -12,7 +12,7 @@ doProcess(2, 3, sum);
 doProcess(2, 3, rest);
 doProcess(2, 3, multiply);
  */
-
+const Operar = (callback, x, y) => callback(x, y);
 
 const getResult = (num1, num2, str) => {
   const operationSytem = {
@@ -21,7 +21,7 @@ const getResult = (num1, num2, str) => {
     '*': (x, y) => x * y,
     '/': (x, y) => x / y
   }
-  const Operar = (callback, x, y) => callback(x, y);
+
   return Operar(operationSytem[str], num1, num2);
 }
 
