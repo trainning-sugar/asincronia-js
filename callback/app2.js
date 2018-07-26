@@ -16,21 +16,20 @@ const Operar = (callback, x, y) => callback(x, y);
 
 const getResult = (num1, num2, str) => {
   const operationSytem = {
-    '+': (x, y) => x + y,
-    '-': (x, y) => x - y,
-    '*': (x, y) => x * y,
-    '/': (x, y) => x / y
-  }
+    "+": (x, y) => x + y,
+    "-": (x, y) => x - y,
+    "*": (x, y) => x * y,
+    "/": (x, y) => x / y
+  };
 
   return Operar(operationSytem[str], num1, num2);
-}
+};
 
+const button = document.getElementById("button");
 
-const button = document.getElementById('button');
-
-button.addEventListener('click', () => {
-  const a = Number(prompt('ingrese un numero'));
-  const b = Number(prompt('ingrese otro numero'));
-  const string = prompt('ingrese una opcion +, -, *, /');
+button.addEventListener("click", () => {
+  const a = Number(prompt("ingrese un numero"));
+  const b = Number(prompt("ingrese otro numero"));
+  const string = prompt("ingrese una opcion +, -, *, /");
   console.log(getResult(a, b, string));
-})
+});
