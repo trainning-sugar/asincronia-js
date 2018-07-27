@@ -1,31 +1,36 @@
 # Asincronía
 
-Este código se ejecuta solo en el call Stack
+Patrones de la asincronia en js
+
+- callbacks
+
+- Promises
+
+  Este código se ejecuta solo en el call Stack
 
 ```js
-function uno(){
-    dos();
-};
+function uno() {
+  dos();
+}
 
-function dos(){
-    console.log('estoy en dos');
+function dos() {
+  console.log("estoy en dos");
 }
 
 uno();
 ```
 
 ```js
-setTimeout(function(){
- console.log('me tarde 2 seg');
-}, 2000)
+setTimeout(function() {
+  console.log("me tarde 2 seg");
+}, 2000);
 
-setTimeout(function(){
- console.log('me tarde 3 seg');
-}, 3000)
+setTimeout(function() {
+  console.log("me tarde 3 seg");
+}, 3000);
 
-console.log('ejecutando');
+console.log("ejecutando");
 ```
-
 
 ```js
 const assert = {
@@ -49,26 +54,25 @@ const test = (string, func) => {
 
 ```js
 const describe = (string, func) => {
-  const callbackDone = ()=>{
-    console.log('done');
-  }
+  const callbackDone = () => {
+    console.log("done");
+  };
   try {
-    if(func.length >= 1){
+    if (func.length >= 1) {
       func(callbackDone);
       console.log(`Passed ${string}`);
-    }else {
+    } else {
       func();
     }
-  } catch(error){
+  } catch (error) {
     console.error(`Failed ${string}`);
     throw error;
   }
-}
+};
 
-describe('foo', (callbackDone)=>{
+describe("foo", callbackDone => {
   const x = 1;
   console.log(x);
   callbackDone();
-})
-
+});
 ```
