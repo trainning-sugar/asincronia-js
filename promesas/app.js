@@ -17,29 +17,14 @@ const printImage = src => {
  document.getElementById('root').appendChild(imgElement);
 }
 
-
-/*Ahora bien esta implementación no es tan limpia porque lo mejor de
-usar las promesas es la composición */
-
-
-loadImage('../callback/images/1.jfif')
- .then(img1 => {
-  printImage(img1.src);
-  loadImage('../callback/images/2.jfif')
-   .then(img2 => {
-    printImage(img2.src);
-    loadImage('../callback/images/3.jfif')
-     .then(img3 => {
-      printImage(img3.src);
-     })
-     .catch(err => {
-      console.error(err);
-     })
-   })
-   .catch(err => {
-    console.error(err);
-   })
+Promise.all([
+ loadImage('../callback/images/1.jfif'),
+ loadImage('../callback/images/2.jfif'),
+ loadImage('../callback/images/3.jfif')
+]).then(images => {
+ images.forEach(img => {
+  printImage(img.src);
  })
- .catch(err => {
-  console.error(err)
- })
+}).catch(err => {
+ console.error(err);
+})
