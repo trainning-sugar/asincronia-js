@@ -17,9 +17,13 @@ const printImage = src => {
  document.getElementById('root').appendChild(imgElement);
 }
 
-console.log(loadImage('../callback/images/1.jfif'));
-const whenImageIsLoad = loadImage('../callback/images/1.jfif')
+
+const whenImageIsLoad = loadImage('../callback/images/n.jfif')
 
 whenImageIsLoad.then((img1) => {
  printImage(img1.src);
+})
+
+whenImageIsLoad.catch((err) => {
+ console.error(err);
 })
