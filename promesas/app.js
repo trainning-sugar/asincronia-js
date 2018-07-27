@@ -18,13 +18,8 @@ const printImage = src => {
 }
 
 console.log(loadImage('../callback/images/1.jfif'));
+const whenImageIsLoad = loadImage('../callback/images/1.jfif')
 
-loadImage('../callback/images/1.jfif').then((img1) => {
+whenImageIsLoad.then((img1) => {
  printImage(img1.src);
- loadImage('../callback/images/2.jfif').then((img2) => {
-  printImage(img2.src);
- })
- loadImage('../callback/images/3.jfif').then((img3) => {
-  printImage(img3.src)
- })
 })
