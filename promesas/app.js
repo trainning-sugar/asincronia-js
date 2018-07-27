@@ -18,6 +18,10 @@ const printImage = src => {
 }
 
 
+/*Ahora bien esta implementación no es tan limpia porque lo mejor de
+usar las promesas es la composición */
+
+
 loadImage('../callback/images/1.jfif')
  .then(img1 => {
   printImage(img1.src);
