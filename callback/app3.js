@@ -1,13 +1,36 @@
+/*Cuando esto este listo ejecuta ese pedazo de código --> Callback*/
+console.log((document.getElementById('hola')));
+
 const loadImage = (url, cb) => {
- const image = new Image();
+ let img = new Image();
+ //console.log(typeof img);
+ //console.dir(img);
+ img.onload = () => {
+  cb(null, img);
+ }
+ img.onerror = () => {
+  cb(new Error(`No se pudo cargar la imagen ${url}`))
 
- image.onload = () => {
-  cb(null, image);
- };
-
- image.onerror = () => {
-  cb(new Error(`Could not load image at ${url}`))
- };
-
- image.src = url;
+ }
+ img.src = url;
 }
+
+const addImg = (src) => {
+ const imgElement = document.createElement('img');
+ imgElement.src = src;
+ document.getElementById('root').appendChild(imgElement);
+}
+
+
+loadImage('images/1.jfif', (err, img) => {
+ if (err) throw err;
+ addImg(img.src);
+ loadImage('images/2.jfif', (err, img) => {
+  if (err) throw err;
+  addImg(img.src);
+  loadImage('images/3.jfif', (err, img) => {
+   if (err) throw err;
+   addImg(img.src);
+  })
+ })
+})
