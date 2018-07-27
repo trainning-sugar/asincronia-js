@@ -21,6 +21,8 @@ const printImage = (src) => {
  document.getElementById('root').appendChild(imgElement);
 }
 
+/*Este codigo no se va a ejecutar en paralelo, va a esperar que el primer callback se ejecute y así sucesivamente */
+
 //console.log(loadImg('images/1.jfif').src);
 loadImg('images/1.jfif', (err, img) => {
  if (err) throw console.error(err);

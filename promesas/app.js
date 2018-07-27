@@ -1,11 +1,11 @@
-const loadImage = (url) => {
+const loadImage = url => {
  return new Promise((resolve, reject) => {
   const img = new Image();
   img.onload = () => {
    resolve(img)
   };
   img.onerror = () => {
-   reject(new Error(`La imagen no pudo ser cargada`));
+   reject(new Error(`La imagen no pudo ser cargada ${url}`));
   }
   img.src = url
  })
@@ -18,12 +18,24 @@ const printImage = src => {
 }
 
 
-const whenImageIsLoad = loadImage('../callback/images/n.jfif')
-
-whenImageIsLoad.then((img1) => {
- printImage(img1.src);
-})
-
-whenImageIsLoad.catch((err) => {
- console.error(err);
-})
+loadImage('../callback/images/1.jfif')
+ .then(img1 => {
+  printImage(img1.src);
+  loadImage('../callback/images/2.jfif')
+   .then(img2 => {
+    printImage(img2.src);
+    loadImage('../callback/images/3.jfif')
+     .then(img3 => {
+      printImage(img3.src);
+     })
+     .catch(err => {
+      console.error(err);
+     })
+   })
+   .catch(err => {
+    console.error(err);
+   })
+ })
+ .catch(err => {
+  console.error(err)
+ })
