@@ -32,15 +32,15 @@ function getUsuarios() {
    console.log('passed and done');
   } catch (err) {
    reject(err);
-   console.error('failed' + err);
+   console.error(`failed!!  ${err}`);
   }
  })
 };
 
-function getUsuario(id) {
+function getUsuario(obj) {
  return new Promise((resolve, reject) => {
   try {
-   resolve(usuarios);
+   resolve(obj);
    console.log('passed and done')
   } catch (err) {
    reject(err);
@@ -52,7 +52,7 @@ function getUsuario(id) {
 function getProfesion(id) {
  return new Promise((resolve, reject) => {
   try {
-   resolve(profesion);
+   resolve(profesion[id]);
    console.log('passed and donde');
   } catch (err) {
    reject(err);
@@ -60,3 +60,26 @@ function getProfesion(id) {
   }
  })
 }
+
+getUsuarios()
+ .then(data => {
+  const user = data.filter(user => user.id === 2)[0]
+  getUsuario(user)
+   .then(user => {
+    console.log(user);
+    const id = user.profesion_id;
+    getProfesion(id)
+     .then(prof => {
+      console.log(`La profesion de ${user.nombre} es ${prof}`);
+     })
+     .catch(err => {
+      console.error(err);
+     })
+   })
+   .catch(err => {
+    console.error(err)
+   })
+ })
+ .catch(err => {
+  console.error(err);
+ })
