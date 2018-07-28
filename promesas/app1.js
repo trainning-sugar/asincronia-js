@@ -36,7 +36,7 @@ function getUsuarios() {
     const f = new Date();
     const hora = f.getHours() * 60 + f.getMinutes() * 60 + f.getSeconds();
     resolve(usuarios);
-    console.log(`passed and done ${hora}`);
+    console.log(`passed and done ${hora} carga de todos los usuarios`);
    }, 1000)
   } catch (err) {
    reject(err);
@@ -52,7 +52,7 @@ function getUsuario(users, id) {
     const f = new Date();
     const hora = f.getHours() * 60 + f.getMinutes() * 60 + f.getSeconds();
     resolve(users.filter(user => user.id === id)[0]);
-    console.log(`passed and done ${hora}`);
+    console.log(`passed and done ${hora} la busqueda del usuario`);
    }, 2000)
   } catch (err) {
    reject(err);
@@ -65,8 +65,10 @@ function getProfesion(id) {
  return new Promise((resolve, reject) => {
   try {
    setTimeout(() => {
+    const f = new Date();
+    const hora = f.getHours() * 60 + f.getMinutes() * 60 + f.getSeconds();
     resolve(profesion[id]);
-    console.log('passed and donde');
+    console.log(`passed and donde ${hora} la busqueda de la profesion`);
    }, 3000)
   } catch (err) {
    reject(err);
