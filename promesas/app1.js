@@ -25,50 +25,38 @@ const profesion = {
 
 //callbacks
 
-function getUsuarios(cb) {
- try {
-  cb(null, usuarios);
-  console.log('passed and done');
- } catch (err) {
-  cb(err);
-  console.error('failed' + err);
- }
+function getUsuarios() {
+ return new Promise((resolve, reject) => {
+  try {
+   resolve(usuarios);
+   console.log('passed and done');
+  } catch (err) {
+   reject(err);
+   console.error('failed' + err);
+  }
+ })
 };
 
-function getUsuario(id, cb) {
- try {
-  cb(null, usuarios);
-  console.log('passed and done')
- } catch (err) {
-  console.error('failed' + err)
-  throw err;
- }
-}
-
-function getProfesion(id, cb) {
- try {
-  cb(null, profesion)
-  console.log('passed and donde');
- } catch (err) {
-  console.error('failed' + err);
-  throw err;
- }
-}
-
-//Nested de callbacks
-//Inversion de control
-
-getUsuarios((err, todosArr) => {
- const userId = todosArr[1].id;
- console.log(userId);
- getUsuario(userId, (err, arr) => {
-  const objUser = arr.filter(user => user.id === userId)[0];
-  const profesionID = objUser.profesion_id;
-  console.log(profesionID);
-  getProfesion(profesionID, (err, obj) => {
-   console.log(profesion[profesionID]);
-   console.log(`la profesion de ${objUser.nombre} es ${obj[profesionID]}`)
-  })
-
+function getUsuario(id) {
+ return new Promise((resolve, reject) => {
+  try {
+   resolve(usuarios);
+   console.log('passed and done')
+  } catch (err) {
+   reject(err);
+   console.error('failed' + err)
+  }
  })
-})
+}
+
+function getProfesion(id) {
+ return new Promise((resolve, reject) => {
+  try {
+   resolve(profesion);
+   console.log('passed and donde');
+  } catch (err) {
+   reject(err);
+   console.error('failed' + err);
+  }
+ })
+}
