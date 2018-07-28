@@ -1,3 +1,6 @@
+const f = new Date();
+const hora = f.getHours() * 60 + f.getMinutes() * 60 + f.getSeconds();
+console.log(`empezo mi carga ${hora}`)
 //Relación 1 -> muchos
 /*Simulando que esto es una base de datos y las bd son asincronas
 le decimos bd, plis dame este usuario */
@@ -26,10 +29,15 @@ const profesion = {
 //callbacks
 
 function getUsuarios() {
+
  return new Promise((resolve, reject) => {
   try {
-   resolve(usuarios);
-   console.log('passed and done');
+   setTimeout(() => {
+    const f = new Date();
+    const hora = f.getHours() * 60 + f.getMinutes() * 60 + f.getSeconds();
+    resolve(usuarios);
+    console.log(`passed and done ${hora}`);
+   }, 1000)
   } catch (err) {
    reject(err);
    console.error(`failed!!  ${err}`);
@@ -37,14 +45,18 @@ function getUsuarios() {
  })
 };
 
-function getUsuario(obj) {
+function getUsuario(users, id) {
  return new Promise((resolve, reject) => {
   try {
-   resolve(obj);
-   console.log('passed and done')
+   setTimeout(() => {
+    const f = new Date();
+    const hora = f.getHours() * 60 + f.getMinutes() * 60 + f.getSeconds();
+    resolve(users.filter(user => user.id === id)[0]);
+    console.log(`passed and done ${hora}`);
+   }, 2000)
   } catch (err) {
    reject(err);
-   console.error('failed' + err)
+   console.error(`Failed!! ${err}`)
   }
  })
 }
@@ -52,8 +64,10 @@ function getUsuario(obj) {
 function getProfesion(id) {
  return new Promise((resolve, reject) => {
   try {
-   resolve(profesion[id]);
-   console.log('passed and donde');
+   setTimeout(() => {
+    resolve(profesion[id]);
+    console.log('passed and donde');
+   }, 3000)
   } catch (err) {
    reject(err);
    console.error('failed' + err);
@@ -63,8 +77,7 @@ function getProfesion(id) {
 
 getUsuarios()
  .then(data => {
-  const user = data.filter(user => user.id === 2)[0]
-  getUsuario(user)
+  getUsuario(data, 2)
    .then(user => {
     console.log(user);
     const id = user.profesion_id;
@@ -83,3 +96,9 @@ getUsuarios()
  .catch(err => {
   console.error(err);
  })
+
+
+console.log(usuarios);
+console.log(profesion);
+
+console.log(`termino mi carga ${hora}`)
