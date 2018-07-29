@@ -315,7 +315,42 @@ console.log("third");
 
 ## 2.- Promises
 
-> Una promesa es un objeto que representa una tarea que será completada en el futuro
+> Una promesa es un objeto que representa una tarea que será completada en el futuro. Representa un sistema alternativo de js para administrar request asíncronos. Todo en el pasado con js eran callbacks. La implementación nativa es la manera más facil de empezar con las promesas, pero en las aplicaciones reales probablemente usarás librerias como Q o Bluebird
+
+Deferred Object -> Es la parte programatica de esa barra de progreso
+Promise Object -> Esto es como una idea de que algo está en progreso
+
+- Deferred Object : Es un objeto js que tiene como propiedad un objeto llamado promise
+
+```js
+const Deferred = {
+  resolve: data => {
+    Deferred.promise = {
+      status: "resolved",
+      value: data
+    };
+    return Deferred.promise;
+  },
+  reject: error => {
+    Deferred.promise = {
+      status: "rejected",
+      value: error
+    };
+    return Deferred.promise;
+  },
+  promise: {
+    status: "pending",
+    value: undefined
+  }
+};
+
+console.log(Deferred.reject("errorcito"));
+console.log(Deferred.resolve("Hola mama"));
+console.log(Deferred.promise);
+```
+
+```js
+```
 
 ```js
 const p1 = new Promise((resolve, reject) => {
