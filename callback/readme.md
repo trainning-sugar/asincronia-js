@@ -444,3 +444,70 @@ promise
     console.log(num3);
   });
 ```
+
+```js
+const promiseToCleanTheRoom = new Promise((resolve, reject) => {
+  let isClean = false;
+  if (isClean) {
+    resolve("Limpiaste dormitorio");
+  } else {
+    reject("El cuarto no esta limpio");
+  }
+});
+
+promiseToCleanTheRoom
+  .then(data => {
+    console.log(data);
+  })
+  .catch(err => {
+    console.log(err);
+  });
+```
+
+```js
+const cleanRoom = () => {
+  return new Promise((resolve, reject) => {
+    resolve("Limpiaste el cuarto");
+  });
+};
+
+const removeGarbage = message => {
+  return new Promise((resolve, reject) => {
+    resolve(`${message} y Botaste la basura`);
+  });
+};
+
+const winIceCream = message => {
+  return new Promise((resolve, reject) => {
+    resolve(`${message} por eso te ganaste el helado`);
+  });
+};
+
+/* cleanRoom().then(msg1 => {
+  removeGarbage(msg1).then(msg2 => {
+    winIceCream(msg2).then(msg3 => {
+      console.log(msg3);
+    });
+  });
+}); */
+
+cleanRoom()
+  .then(msg1 => {
+    return removeGarbage(msg1);
+  })
+  .then(msg2 => {
+    return winIceCream(msg2);
+  })
+  .then(msg3 => {
+    console.log(msg3);
+  });
+
+Promise.all([cleanRoom(), removeGarbage(), winIceCream()]).then(() => {
+  console.log("Todas las promesas terminaron");
+});
+
+//Que pasa si solo quiero que al menos una termine
+Promise.race([cleanRoom(), removeGarbage(), winIceCream()]).then(() => {
+  console.log("Una de ellas ha terminado");
+});
+```
